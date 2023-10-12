@@ -20,4 +20,4 @@ jobs:
           gh issue create --title "New Release: $release_tag" --body "Release Notes:\n\n$release_title\n\n$release_body"
 
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
