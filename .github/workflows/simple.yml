@@ -14,12 +14,7 @@ jobs:
         id: create_issue
         run: |
           # Get the release information
-          release_tag="$GITHUB_REF"
-          release_title="$GITHUB_EVENT.client_payload.title"
-          release_body="$GITHUB_EVENT.client_payload.body"
-
           # Create an issue using the GitHub CLI
-          gh issue create --title "New Release: $release_tag" --body "Release Notes:\n\n$release_title\n\n$release_body"
-
+          gh issue create --title "New Release" --body "Release Notes"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
