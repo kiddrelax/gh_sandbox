@@ -1,0 +1,16 @@
+name: New Release Workflow
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Perform actions on a new release
+      run: |
+        echo "Hello, World!"
