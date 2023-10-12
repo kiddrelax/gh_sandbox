@@ -1,16 +1,25 @@
-name: New Release Workflow
+name: Create Issue on New Release
 on:
   release:
     types:
-      - published
+      - created
 
 jobs:
-  build:
+  create_issue:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Check out the code
+        uses: actions/checkout@v2
+      - name: Create Issue
+        id: create_issue
+        run: |
+          # Get the release information
+          release_tag="$GITHUB_REF"
+          release_title="$GITHUB_EVENT.client_payload.title"
+          release_body="$GITHUB_EVENT.client_payload.body"
 
-    - name: Perform actions on a new release
-      run: |
-        echo "Hello, World!"
+          # Create an issue using the GitHub CLI
+          gh issue create --title "New Release: $release_tag" --body "Release Notes:\n\n$release_title\n\n$release_body"
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
