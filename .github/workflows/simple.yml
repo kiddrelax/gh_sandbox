@@ -8,8 +8,6 @@ jobs:
   create_issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v2
       - name: Create Issue
         id: create_issue
         run: |
