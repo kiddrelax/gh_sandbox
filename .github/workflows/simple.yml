@@ -1,20 +1,23 @@
-name: Create Issue on New Release
+name: New Release Workflow
 on:
   release:
     types:
-      - created
+      - published
 
 jobs:
-  create_issue:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v2
-      - name: Create Issue
-        id: create_issue
-        run: |
-          # Get the release information
-          # Create an issue using the GitHub CLI
-          gh issue create --title "New Release" --body "Release Notes"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: create an issue
+      #uses: dacbd/create-issue-action@main
+      run: gh issue create --title "I found a buggs" --body "Nothing"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #title: Simple test issue from a new release
+        #body: my new issue fom a new release
